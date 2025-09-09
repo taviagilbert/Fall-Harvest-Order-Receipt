@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+html,
+body {
+    scroll-behavior: smooth;
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.font-mono {
+    font-family: "Roboto Mono", monospace;
+}
+.email-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+.receipt-table th,
+.receipt-table td {
+    padding: 10px 4px;
+}
+.pumpkin-mascot {
+    animation: bounce 2.5s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(3deg);
+    }
+}
+.summary-row {
+    animation: fadeInUp 0.6s ease-out both;
+    opacity: 0;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

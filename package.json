@@ -1,0 +1,45 @@
+{
+  "name": "fall_harvest_order_receipt",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:css": "tailwindcss -i ./src/assets/css/styles.css -o ./dist/assets/css/styles.min.css --minify",
+    "build:js": "babel src/assets/js/scripts.js | terser -c -m --format \"comments=false\" -o dist/assets/js/scripts.min.js",
+    "build:html": "html-minifier-terser --input-dir src --output-dir dist --file-ext html --remove-comments --collapse-whitespace",
+    "copy:resource": "copyfiles -u 1 \"src/assets/**/*\" -e \"src/assets/images/**/*\" -e \"src/assets/css/**/*\" -e \"src/assets/js/**/*\" dist/",
+    "copy:fontawesome": "copyfiles -f node_modules/@fortawesome/fontawesome-free/css/all.min.css dist/assets/fontawesome/css/ && copyfiles -f node_modules/@fortawesome/fontawesome-free/webfonts/* dist/assets/fontawesome/webfonts/",
+    "optimize:images": "node scripts/optimize-images.js",
+    "build": "yarn clean && npm-run-all build:css build:js build:html && yarn copy:resource && yarn optimize:images",
+    "watch:css": "yarn build:css --watch",
+    "watch:js": "onchange \"src/assets/js/scripts.js\" --delay 100 -- yarn build:js",
+    "watch:html": "onchange \"src/*.html\" --delay 100 -- yarn build:html",
+    "watch:images": "node scripts/optimize-images.js --watch",
+    "watch:resource": "onchange \"src/assets/**/*\" --exclude \"src/assets/images/**/*\" --exclude \"src/assets/css/**/*\" --exclude \"src/assets/js/**/*\" --delay 100 -- yarn copy:resource",
+    "vite": "vite dist --open",
+    "dev": "yarn build && npm-run-all --parallel watch:css watch:js watch:html watch:images watch:resource vite",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@tailwindcss/cli": "^4.0.17",
+    "chokidar": "^3.6.0",
+    "chokidar-cli": "^3.0.0",
+    "copyfiles": "^2.4.1",
+    "del-cli": "^6.0.0",
+    "fs-extra": "^11.3.0",
+    "glob": "^10.3.10",
+    "html-minifier-terser": "^7.2.0",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.1.0",
+    "rimraf": "^5.0.1",
+    "sharp": "^0.33.2",
+    "terser": "^5.18.2",
+    "vite": "^6.2.3"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.5.2",
+    "tailwindcss": "^4.0.17"
+  }
+}
